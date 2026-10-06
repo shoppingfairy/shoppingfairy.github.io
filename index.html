@@ -34,7 +34,7 @@ footer{font-size:11px;color:var(--sub);text-align:center;padding:24px 16px;line-
 <script>
 const q=document.getElementById('q'),cards=[...document.querySelectorAll('.card')],none=document.getElementById('none');if(!cards.length)none.hidden=false;
 function f(){const raw=q.value.trim().toLowerCase(),v=raw.replace(/^0+/,'');if(!cards.length)return;let n=0;
- const vid=/^v\d+$/.test(raw)?'v'+raw.slice(1).padStart(2,'0'):'';
+ const vid=/^v[0-9]+$/.test(raw)?'v'+raw.slice(1).padStart(2,'0'):'';
  cards.forEach(c=>{const ok=!raw||(vid?c.dataset.v.split(' ').includes(vid):(c.dataset.no===v||c.dataset.name.includes(v)));c.hidden=!ok;if(ok)n++});none.hidden=n>0;}
 q.addEventListener('input',f);
 const h=decodeURIComponent(location.hash.slice(1));if(h){q.value=h;f();}
