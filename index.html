@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>__BRAND__ 상품 찾기</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1d1d1b;--sub:#6b665c;--line:#e4dfd3;--teal:#1c524e;--yel:#f1c612}
+@media (prefers-color-scheme:dark){:root{--bg:#141413;--card:#1f1f1d;--ink:#f1efe8;--sub:#a8a294;--line:#34322d}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+header{background:var(--teal);color:#fff;padding:22px 16px 18px}
+header h1{margin:0 0 6px;font-size:22px}header p{margin:0;font-size:12px;opacity:.85;line-height:1.5}
+main{max-width:640px;margin:0 auto;padding:16px}
+input{width:100%;font-size:20px;padding:14px 16px;border:2px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink)}
+input:focus{outline:none;border-color:var(--yel)}
+.card{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:12px}
+.no{flex:none;width:64px;height:64px;border-radius:50%;background:var(--yel);color:#141414;font-weight:900;font-size:24px;display:flex;align-items:center;justify-content:center}
+.body{flex:1;min-width:0}.name{font-weight:700;font-size:16px;line-height:1.35}.cat{font-size:12px;color:var(--sub);margin-top:2px}
+.btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.btns a{flex:1;min-width:120px;text-align:center;text-decoration:none;font-weight:700;font-size:14px;padding:10px;border-radius:10px}
+.cp{background:#e4002b;color:#fff}.nv{background:#03c75a;color:#fff}
+.empty{color:var(--sub);text-align:center;margin:40px 0}
+.old{display:block;text-align:center;margin:28px 0 0;padding:14px;border:1px dashed var(--line);border-radius:14px;color:var(--sub);text-decoration:none;font-size:14px}
+footer{font-size:11px;color:var(--sub);text-align:center;padding:24px 16px;line-height:1.6}
+</style></head><body>
+<header><h1>__BRAND__ 상품 찾기</h1><p>이 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다. 네이버 쇼핑 커넥트 링크도 판매 발생 시 수수료를 제공받습니다.</p></header>
+<main>
+<input id="q" type="search" inputmode="search" placeholder="영상에 나온 번호나 이름 (예: 7)" autocomplete="off">
+<div id="list"></div>
+<p class="empty" id="none" hidden>__EMPTY__</p>
+<a class="old" href="__OLD__" target="_blank" rel="noopener">예전 영상 상품 모음 보기 →</a>
+</main>
+<footer>가격·재고는 판매처에서 바뀔 수 있어요. 구매 전 판매처 정보를 꼭 확인하세요.</footer>
+<script>
+const q=document.getElementById('q'),cards=[...document.querySelectorAll('.card')],none=document.getElementById('none');if(!cards.length)none.hidden=false;
+function f(){const v=q.value.trim().replace(/^0+/,'').toLowerCase();if(!cards.length)return;let n=0;
+ cards.forEach(c=>{const ok=!v||c.dataset.no===v||c.dataset.name.includes(v);c.hidden=!ok;if(ok)n++});none.hidden=n>0;}
+q.addEventListener('input',f);
+const h=decodeURIComponent(location.hash.slice(1));if(h){q.value=h;f();}
+</script></body></html>
