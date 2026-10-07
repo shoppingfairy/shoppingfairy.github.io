@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>쇼핑요정 허브 관리</title>
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="apple-touch-icon" href="img/apple-touch-icon.png"><meta name="theme-color" content="#f6f1e4">
+<style>
+/* 회장님이 직접 상품을 넣고 고치는 화면(10/7 「수동으로도 넣을 수 있도록」). 저장은 GitHub 저장소 manual.json + img/ 에 바로 쓴다(토큰은 이 기기 브라우저에만 저장). */
+:root{--bg:#eff0f2;--card:#fff;--ink:#222;--sub:#8a8f98;--line:#e6e8eb;--brand:#58a03c;--brand-ink:#2f6b1c;--cream:#f6f1e4;--cp:#e4002b;--nv:#03c75a;--ds:#e9544b;color-scheme:light}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Malgun Gothic",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:520px;margin:0 auto;min-height:100vh;padding-bottom:40px}
+header{background:var(--cream);padding:18px 16px 14px;display:flex;align-items:center;gap:12px}
+header img{width:46px;height:46px;border-radius:50%;background:#fff}
+header h1{margin:0;font-size:18px;font-weight:800}header p{margin:2px 0 0;font-size:12.5px;color:var(--sub)}
+header a{margin-left:auto;font-size:13px;color:var(--brand-ink);font-weight:700;text-decoration:none}
+.box{background:var(--card);border-radius:16px;margin:12px 16px 0;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.box h2{margin:0 0 8px;font-size:15px}
+label{display:block;font-size:13px;font-weight:700;color:#444;margin:12px 0 5px}label small{font-weight:400;color:var(--sub)}
+input[type=text],input[type=url],input[type=search],input[type=password],select,textarea{width:100%;font-size:16px;padding:12px 13px;border:1px solid var(--line);border-radius:12px;background:#f7f8fa;color:var(--ink);font-family:inherit}
+input:focus,select:focus{outline:none;border-color:var(--brand);background:#fff}
+.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
+button{font-family:inherit;cursor:pointer;border:0;border-radius:12px;font-weight:800;font-size:15px;padding:13px 16px}
+.pri{background:var(--brand);color:#fff;width:100%;margin-top:14px}.pri:disabled{opacity:.5}
+.sec{background:#eef0f3;color:#333}.danger{background:#fff0ef;color:#c0392b}
+.mini{font-size:13px;padding:8px 12px;border-radius:999px}
+.ok{color:var(--brand-ink);font-weight:700;font-size:13px}.err{color:#c0392b;font-weight:700;font-size:13px;white-space:pre-wrap}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#2f3130;color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;font-weight:700;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:50;max-width:92vw;text-align:center}
+.toast a{color:#9ccf7f}
+#list{padding:4px 16px 0}
+.card{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:14px;padding:10px;margin-top:10px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.card.hid{opacity:.45}
+.pic{flex:none;width:64px;height:64px;border-radius:10px;overflow:hidden;background:#f3f4f6;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:11px}.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.body{flex:1;min-width:0}
+.name{font-size:14.5px;font-weight:600;line-height:1.3;word-break:keep-all}.name b{color:var(--brand-ink)}
+.tags{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:800;color:#fff;padding:2px 8px;border-radius:999px}.tag.cp{background:var(--cp)}.tag.nv{background:var(--nv)}.tag.ds{background:var(--ds)}.tag.m{background:#8e7cc3}.tag.h{background:#999}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none;align-items:flex-end;justify-content:center}
+.sheet.on{display:flex}
+.panel{background:#fff;width:100%;max-width:520px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:16px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.panel h2{margin:0;font-size:17px;display:flex;align-items:center;justify-content:space-between}
+.panel h2 button{background:none;font-size:22px;padding:4px 8px;color:#888}
+.prev{display:flex;align-items:center;gap:12px;margin-top:6px}
+.prev img{width:84px;height:84px;border-radius:10px;object-fit:cover;background:#f3f4f6;display:none}
+.filebtn{display:inline-block;background:#eef0f3;border-radius:12px;padding:11px 14px;font-weight:700;font-size:14px}
+.filebtn input{display:none}
+.hint{font-size:12.5px;color:var(--sub);line-height:1.5;margin-top:6px}
+.chk{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;margin-top:14px}.chk input{width:20px;height:20px}
+details{margin-top:10px;font-size:13px;color:#555}details summary{cursor:pointer;font-weight:700}
+details ol{padding-left:18px;line-height:1.7}
+.count{font-size:13px;color:var(--sub);margin:12px 16px 0}
+</style></head><body><div class="wrap">
+<header><img src="img/profile.jpg" alt=""><div><h1>쇼핑요정 허브 관리</h1><p>상품을 직접 넣고 고치는 곳</p></div><a href="./" target="_blank">허브 보기 ↗</a></header>
+
+<div class="box" id="authbox">
+ <h2>깃허브 연결</h2>
+ <div id="authon" hidden><span class="ok" id="authwho">연결됨</span> <button class="sec mini" id="authchange" style="margin-left:8px">토큰 바꾸기</button></div>
+ <div id="authoff">
+  <label>깃허브 토큰 <small>이 기기에만 저장돼요</small></label>
+  <input type="password" id="token" placeholder="github_pat_… 또는 ghp_…" autocomplete="off">
+  <button class="pri" id="authsave">연결하기</button>
+  <p class="err" id="autherr"></p>
+  <details><summary>토큰 만드는 법 (처음 한 번)</summary>
+   <ol>
+    <li><a href="https://github.com/settings/tokens/new?description=%EC%87%BC%ED%95%91%EC%9A%94%EC%A0%95%20%ED%97%88%EB%B8%8C%20%EA%B4%80%EB%A6%AC&scopes=public_repo" target="_blank">이 링크</a>를 열어 깃허브(bitplus777)로 로그인해요.</li>
+    <li>맨 아래 초록 <b>Generate token</b> 을 눌러요. (Expiration 은 <b>No expiration</b> 으로 바꾸면 다시 안 만들어도 돼요)</li>
+    <li>나오는 <b>ghp_…</b> 글자를 복사해서 위 칸에 붙여 넣고 「연결하기」.</li>
+   </ol>
+  </details>
+ </div>
+</div>
+
+<div class="box"><button class="pri" id="newbtn" style="margin-top:0">＋ 새 상품 넣기</button></div>
+
+<div class="box"><input type="search" id="q" placeholder="번호나 이름으로 찾기" autocomplete="off"></div>
+<p class="count" id="count"></p>
+<div id="list"></div>
+
+<div class="sheet" id="sheet"><div class="panel">
+ <h2><span id="ptitle">새 상품</span><button type="button" id="close">×</button></h2>
+ <p class="hint" id="pno"></p>
+ <label>상품 이름 *</label><input type="text" id="f_name" placeholder="예: 세면대 수전 틈새 선반">
+ <label>분류 <small>없으면 비워도 돼요</small></label><input type="text" id="f_cat" list="cats" placeholder="예: 욕실"><datalist id="cats"></datalist>
+ <label>쿠팡 파트너스 링크 <small>link.coupang.com/a/…</small></label><input type="url" id="f_cp" placeholder="https://link.coupang.com/a/…" inputmode="url">
+ <label>네이버 쇼핑커넥트 링크 <small>naver.me/…</small></label><input type="url" id="f_nv" placeholder="https://naver.me/…" inputmode="url">
+ <div class="row"><div><label>다이소몰 품번 <small>선택</small></label><input type="text" id="f_dcode" placeholder="예: 1063378" inputmode="numeric"></div>
+ <div><label>다이소 가격 <small>선택</small></label><input type="text" id="f_dprice" placeholder="예: 2,000원"></div></div>
+ <label>영상 편번호 <small>선택 · 쉼표로 여러 개 (예: 23)</small></label><input type="text" id="f_vid" placeholder="23" inputmode="numeric">
+ <label>사진</label>
+ <div class="prev"><img id="f_prev" alt=""><label class="filebtn">📷 사진 고르기<input type="file" id="f_img" accept="image/*"></label></div>
+ <p class="hint">휴대폰 사진도 돼요. 600px 로 줄여서 올려요.</p>
+ <label class="chk" id="hidrow" hidden><input type="checkbox" id="f_hidden"> 허브에서 숨기기</label>
+ <p class="err" id="ferr"></p>
+ <button class="pri" id="save">저장하기</button>
+ <button class="danger" id="del" style="width:100%;margin-top:8px" hidden>이 상품 지우기</button>
+</div></div>
+
+</div>
+<script>
+const OWNER='shoppingfairy', REPO='shoppingfairy.github.io', API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/`;
+const $=id=>document.getElementById(id);
+let token=null, products={items:[]}, manual={items:[]}, manualSha=null, editing=null;
+try{token=localStorage.getItem('gh_token')}catch(e){}
+
+function toast(html,ms=5000){const t=document.createElement('div');t.className='toast';t.innerHTML=html;document.body.appendChild(t);setTimeout(()=>t.remove(),ms)}
+function hdr(){return {Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}}
+const b64enc=s=>btoa(unescape(encodeURIComponent(s))), b64dec=s=>decodeURIComponent(escape(atob(s.replace(/\n/g,''))));
+
+async function ghGet(path){const r=await fetch(API+path+'?t='+Date.now(),{headers:hdr(),cache:'no-store'});if(r.status===404)return null;if(!r.ok)throw new Error('읽기 실패 '+r.status+' '+path);return r.json()}
+async function ghPut(path,content,sha,msg){const body={message:msg,content,branch:'main'};if(sha)body.sha=sha;
+ const r=await fetch(API+path,{method:'PUT',headers:{...hdr(),'Content-Type':'application/json'},body:JSON.stringify(body)});
+ if(!r.ok){const j=await r.json().catch(()=>({}));throw new Error('저장 실패 '+r.status+' '+(j.message||''))}return r.json()}
+async function ghDel(path,sha,msg){const r=await fetch(API+path,{method:'DELETE',headers:{...hdr(),'Content-Type':'application/json'},body:JSON.stringify({message:msg,sha,branch:'main'})});if(!r.ok)throw new Error('지우기 실패 '+r.status)}
+
+async function checkAuth(){
+ $('autherr').textContent='';
+ try{const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}`,{headers:hdr()});if(!r.ok)throw new Error(r.status===401?'토큰이 맞지 않아요':'저장소에 접근할 수 없어요 ('+r.status+')');
+  const j=await r.json();if(!(j.permissions&&j.permissions.push))throw new Error('이 토큰은 쓰기 권한이 없어요 (public_repo 또는 Contents: Read and write)');
+  const u=await fetch('https://api.github.com/user',{headers:hdr()}).then(r=>r.ok?r.json():{});
+  $('authwho').textContent='연결됨 ✓ '+(u.login||'');$('authon').hidden=false;$('authoff').hidden=true;return true}
+ catch(e){$('autherr').textContent=e.message;$('authon').hidden=true;$('authoff').hidden=false;return false}
+}
+$('authsave').onclick=async()=>{const t=$('token').value.trim();if(!t)return;token=t;if(await checkAuth()){try{localStorage.setItem('gh_token',t)}catch(e){}await loadAll()}};
+$('authchange').onclick=()=>{$('authon').hidden=true;$('authoff').hidden=false;$('token').value=''};
+
+async function loadAll(){
+ const [p,m]=await Promise.all([fetch('products.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():{items:[]}).catch(()=>({items:[]})), token?ghGet('manual.json'):null]);
+ products=p; if(m){manualSha=m.sha;try{manual=JSON.parse(b64dec(m.content))}catch(e){manual={items:[]}}}else{manual={items:[]};manualSha=null}
+ const cats=new Set();[...products.items,...manual.items].forEach(x=>x.category&&cats.add(x.category));$('cats').innerHTML=[...cats].map(c=>`<option value="${esc(c)}">`).join('');
+ render();
+}
+function merged(){const by=new Map();products.items.forEach(x=>by.set(+x.no,{...x,_src:'auto'}));
+ manual.items.forEach(x=>{const o=by.get(+x.no)||{no:+x.no,_src:'manual'};for(const k of ['name','category','coupang','naver','image','daiso'])if(x[k])o[k]=x[k];o.hidden=!!x.hidden;o._m=x;if(!by.has(+x.no))o._src='manual';by.set(+x.no,o)});
+ return [...by.values()].sort((a,b)=>b.no-a.no)}
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function render(){const q=$('q').value.trim().toLowerCase().replace(/^0+/,'');const all=merged();let n=0;
+ $('list').innerHTML=all.filter(x=>!q||String(x.no)===q||(x.name||'').toLowerCase().includes(q)).map(x=>{n++;const tags=[];
+  if(x.coupang)tags.push('<span class="tag cp">쿠팡</span>');if(x.naver)tags.push('<span class="tag nv">네이버</span>');if(x.daiso&&x.daiso.code)tags.push('<span class="tag ds">다이소</span>');
+  if(x._src==='manual')tags.push('<span class="tag m">직접 넣음</span>');else if(x._m)tags.push('<span class="tag m">고침</span>');if(x.hidden)tags.push('<span class="tag h">숨김</span>');
+  return `<div class="card${x.hidden?' hid':''}" data-no="${x.no}"><div class="pic">${x.image?`<img loading="lazy" src="${esc(x.image)}?t=${manualSha||''}" alt="">`:'사진 없음'}</div><div class="body"><div class="name"><b>${String(x.no).padStart(3,'0')}.</b> ${esc(x.name)}</div><div class="tags">${tags.join('')}</div></div><button class="sec mini">수정</button></div>`}).join('');
+ $('count').textContent=`상품 ${all.length}개 (직접 넣음 ${manual.items.filter(m=>m.new).length}개)`;
+ $('list').querySelectorAll('.card').forEach(c=>c.querySelector('button').onclick=()=>openEdit(+c.dataset.no));
+}
+$('q').addEventListener('input',render);
+
+let imgData=null;
+function openSheet(){$('sheet').classList.add('on');$('ferr').textContent='';imgData=null;$('f_prev').style.display='none';$('f_prev').src='';$('f_img').value=''}
+$('close').onclick=()=>$('sheet').classList.remove('on');
+$('sheet').addEventListener('click',e=>{if(e.target===$('sheet'))$('sheet').classList.remove('on')});
+$('newbtn').onclick=()=>{if(!token){toast('먼저 깃허브 토큰을 연결해 주세요');return}editing=null;openSheet();
+ const next=Math.max(0,...merged().map(x=>+x.no))+1;$('ptitle').textContent='새 상품';$('pno').textContent=`번호 ${String(next).padStart(3,'0')} 으로 들어가요 (영상 배지·DM 에 쓰는 번호)`;
+ ['f_name','f_cat','f_cp','f_nv','f_dcode','f_dprice','f_vid'].forEach(i=>$(i).value='');$('f_hidden').checked=false;$('hidrow').hidden=true;$('del').hidden=true};
+function openEdit(no){if(!token){toast('먼저 깃허브 토큰을 연결해 주세요');return}const x=merged().find(y=>+y.no===no);if(!x)return;editing=x;openSheet();
+ $('ptitle').textContent=`${String(no).padStart(3,'0')}번 고치기`;$('pno').textContent=x._src==='manual'?'직접 넣은 상품이에요':'자동으로 등록된 상품이에요. 고친 칸만 덮어써요.';
+ $('f_name').value=x.name||'';$('f_cat').value=x.category||'';$('f_cp').value=x.coupang||'';$('f_nv').value=x.naver||'';$('f_dcode').value=(x.daiso&&x.daiso.code)||'';$('f_dprice').value=(x.daiso&&x.daiso.price)||'';
+ $('f_vid').value=((x._m&&x._m.videos)||x.videos||[]).join(', ');$('f_hidden').checked=!!x.hidden;$('hidrow').hidden=false;$('del').hidden=x._src!=='manual';
+ if(x.image){$('f_prev').src=x.image+'?t='+Date.now();$('f_prev').style.display='block'}}
+
+$('f_img').onchange=e=>{const f=e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{const s=Math.min(1,600/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+  const url=c.toDataURL('image/jpeg',.86);imgData=url.split(',')[1];$('f_prev').src=url;$('f_prev').style.display='block';URL.revokeObjectURL(img.src)};img.src=URL.createObjectURL(f)};
+
+$('save').onclick=async()=>{
+ const name=$('f_name').value.trim(),cp=$('f_cp').value.trim(),nv=$('f_nv').value.trim(),dcode=$('f_dcode').value.trim(),dprice=$('f_dprice').value.trim();
+ const E=m=>{$('ferr').textContent=m;return false};$('ferr').textContent='';
+ if(!name)return E('상품 이름을 적어 주세요');
+ if(cp&&!/coupang\.com/.test(cp))return E('쿠팡 링크는 link.coupang.com 주소여야 해요');
+ if(nv&&!/naver\.(me|com)/.test(nv))return E('네이버 링크는 naver.me 주소여야 해요');
+ if(!editing&&!cp&&!nv&&!dcode)return E('쿠팡·네이버 링크나 다이소 품번 중 하나는 있어야 허브에 보여요');
+ const vids=$('f_vid').value.split(/[,\s]+/).filter(Boolean).map(v=>v.replace(/\D/g,'').padStart(2,'0')).filter(Boolean);
+ $('save').disabled=true;$('save').textContent='저장 중…';
+ try{
+  const now=new Date();const edited=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,19);
+  const m=await ghGet('manual.json');if(m){manualSha=m.sha;manual=JSON.parse(b64dec(m.content))}else{manualSha=null;manual={items:[]}}
+  let no=editing?+editing.no:Math.max(0,...products.items.map(x=>+x.no),...manual.items.map(x=>+x.no))+1;
+  let item=manual.items.find(x=>+x.no===no);const isNew=!editing;
+  if(!item){item={no,new:isNew||false};manual.items.push(item)}
+  if(imgData){const path=`img/m${no}_${Date.now().toString(36)}.jpg`;await ghPut(path,imgData,null,`사진 ${no}`);item.image=path}
+  Object.assign(item,{name,category:$('f_cat').value.trim(),coupang:cp,naver:nv,videos:vids,hidden:$('f_hidden').checked,edited});
+  if(dcode)item.daiso={code:dcode,price:dprice};else delete item.daiso;
+  manual.items.sort((a,b)=>a.no-b.no);
+  await ghPut('manual.json',b64enc(JSON.stringify(manual,null,1)),manualSha,`${isNew?'새 상품':'고침'} ${no} ${name}`);
+  $('sheet').classList.remove('on');toast(`저장했어요 ✓ 1~2분 뒤 <a href="./#${no}" target="_blank">허브 #${no}</a> 에 보여요`,8000);await loadAll();
+ }catch(e){E(e.message+(/409|422/.test(e.message)?' — 다른 곳에서 동시에 고쳤어요. 다시 「저장하기」를 눌러 주세요.':''))}
+ finally{$('save').disabled=false;$('save').textContent='저장하기'}
+};
+$('del').onclick=async()=>{if(!editing||!confirm(`${editing.no}번 「${editing.name}」 을 허브에서 지울까요?`))return;
+ try{const m=await ghGet('manual.json');manualSha=m.sha;manual=JSON.parse(b64dec(m.content));manual.items=manual.items.filter(x=>+x.no!==+editing.no);
+  await ghPut('manual.json',b64enc(JSON.stringify(manual,null,1)),manualSha,`지움 ${editing.no}`);$('sheet').classList.remove('on');toast('지웠어요');await loadAll()}catch(e){$('ferr').textContent=e.message}};
+
+(async()=>{if(token&&await checkAuth()){}else{$('authon').hidden=true;$('authoff').hidden=false}await loadAll()})();
+</script></body></html>
