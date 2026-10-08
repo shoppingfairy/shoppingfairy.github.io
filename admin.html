@@ -33,7 +33,7 @@ button{font-family:inherit;cursor:pointer;border:0;border-radius:12px;font-weigh
 .body{flex:1;min-width:0}
 .name{font-size:14.5px;font-weight:600;line-height:1.3;word-break:keep-all}.name b{color:var(--brand-ink)}
 .tags{display:flex;gap:4px;margin-top:5px;flex-wrap:wrap}
-.tag{font-size:11px;font-weight:800;color:#fff;padding:2px 8px;border-radius:999px}.tag.cp{background:var(--cp)}.tag.nv{background:var(--nv)}.tag.ds{background:var(--ds)}.tag.m{background:#8e7cc3}.tag.h{background:#999}
+.tag{font-size:11px;font-weight:800;color:#fff;padding:2px 8px;border-radius:999px}.tag.cp{background:var(--cp)}.tag.nv{background:var(--nv)}.tag.tf{background:#0064ff}.tag.ds{background:var(--ds)}.tag.m{background:#8e7cc3}.tag.h{background:#999}
 .sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none;align-items:flex-end;justify-content:center}
 .sheet.on{display:flex}
 .panel{background:#fff;width:100%;max-width:520px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:16px 16px calc(24px + env(safe-area-inset-bottom,0px))}
@@ -82,6 +82,7 @@ details ol{padding-left:18px;line-height:1.7}
  <label>분류 <small>없으면 비워도 돼요</small></label><input type="text" id="f_cat" list="cats" placeholder="예: 욕실"><datalist id="cats"></datalist>
  <label>쿠팡 파트너스 링크 <small>link.coupang.com/a/…</small></label><input type="url" id="f_cp" placeholder="https://link.coupang.com/a/…" inputmode="url">
  <label>네이버 쇼핑커넥트 링크 <small>naver.me/…</small></label><input type="url" id="f_nv" placeholder="https://naver.me/…" inputmode="url">
+ <label>토스쇼핑 쉐어링크 <small>선택 · 쉐어링크 「링크 발급」 주소</small></label><input type="url" id="f_tf" placeholder="https://…toss…" inputmode="url">
  <div class="row"><div><label>다이소몰 품번 <small>선택</small></label><input type="text" id="f_dcode" placeholder="예: 1063378" inputmode="numeric"></div>
  <div><label>다이소 가격 <small>선택</small></label><input type="text" id="f_dprice" placeholder="예: 2,000원"></div></div>
  <label>영상 편번호 <small>선택 · 쉼표로 여러 개 (예: 23)</small></label><input type="text" id="f_vid" placeholder="23" inputmode="numeric">
@@ -129,12 +130,12 @@ async function loadAll(){
  render();
 }
 function merged(){const by=new Map();products.items.forEach(x=>by.set(+x.no,{...x,_src:'auto'}));
- manual.items.forEach(x=>{const o=by.get(+x.no)||{no:+x.no,_src:'manual'};for(const k of ['name','category','coupang','naver','image','daiso'])if(x[k])o[k]=x[k];o.hidden=!!x.hidden;o._m=x;if(!by.has(+x.no))o._src='manual';by.set(+x.no,o)});
+ manual.items.forEach(x=>{const o=by.get(+x.no)||{no:+x.no,_src:'manual'};for(const k of ['name','category','coupang','naver','toss','image','daiso'])if(x[k])o[k]=x[k];o.hidden=!!x.hidden;o._m=x;if(!by.has(+x.no))o._src='manual';by.set(+x.no,o)});
  return [...by.values()].sort((a,b)=>b.no-a.no)}
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function render(){const q=$('q').value.trim().toLowerCase().replace(/^0+/,'');const all=merged();let n=0;
  $('list').innerHTML=all.filter(x=>!q||String(x.no)===q||(x.name||'').toLowerCase().includes(q)).map(x=>{n++;const tags=[];
-  if(x.coupang)tags.push('<span class="tag cp">쿠팡</span>');if(x.naver)tags.push('<span class="tag nv">네이버</span>');if(x.daiso&&x.daiso.code)tags.push('<span class="tag ds">다이소</span>');
+  if(x.coupang)tags.push('<span class="tag cp">쿠팡</span>');if(x.naver)tags.push('<span class="tag nv">네이버</span>');if(x.toss)tags.push('<span class="tag tf">토스</span>');if(x.daiso&&x.daiso.code)tags.push('<span class="tag ds">다이소</span>');
   if(x._src==='manual')tags.push('<span class="tag m">직접 넣음</span>');else if(x._m)tags.push('<span class="tag m">고침</span>');if(x.hidden)tags.push('<span class="tag h">숨김</span>');
   return `<div class="card${x.hidden?' hid':''}" data-no="${x.no}"><div class="pic">${x.image?`<img loading="lazy" src="${esc(x.image)}?t=${manualSha||''}" alt="">`:'사진 없음'}</div><div class="body"><div class="name"><b>${String(x.no).padStart(3,'0')}.</b> ${esc(x.name)}</div><div class="tags">${tags.join('')}</div></div><button class="sec mini">수정</button></div>`}).join('');
  $('count').textContent=`상품 ${all.length}개 (직접 넣음 ${manual.items.filter(m=>m.new).length}개)`;
@@ -148,10 +149,10 @@ $('close').onclick=()=>$('sheet').classList.remove('on');
 $('sheet').addEventListener('click',e=>{if(e.target===$('sheet'))$('sheet').classList.remove('on')});
 $('newbtn').onclick=()=>{if(!token){toast('먼저 깃허브 토큰을 연결해 주세요');return}editing=null;openSheet();
  const next=Math.max(0,...merged().map(x=>+x.no))+1;$('ptitle').textContent='새 상품';$('pno').textContent=`번호 ${String(next).padStart(3,'0')} 으로 들어가요 (영상 배지·DM 에 쓰는 번호)`;
- ['f_name','f_cat','f_cp','f_nv','f_dcode','f_dprice','f_vid'].forEach(i=>$(i).value='');$('f_hidden').checked=false;$('hidrow').hidden=true;$('del').hidden=true};
+ ['f_name','f_cat','f_cp','f_nv','f_tf','f_dcode','f_dprice','f_vid'].forEach(i=>$(i).value='');$('f_hidden').checked=false;$('hidrow').hidden=true;$('del').hidden=true};
 function openEdit(no){if(!token){toast('먼저 깃허브 토큰을 연결해 주세요');return}const x=merged().find(y=>+y.no===no);if(!x)return;editing=x;openSheet();
  $('ptitle').textContent=`${String(no).padStart(3,'0')}번 고치기`;$('pno').textContent=x._src==='manual'?'직접 넣은 상품이에요':'자동으로 등록된 상품이에요. 고친 칸만 덮어써요.';
- $('f_name').value=x.name||'';$('f_cat').value=x.category||'';$('f_cp').value=x.coupang||'';$('f_nv').value=x.naver||'';$('f_dcode').value=(x.daiso&&x.daiso.code)||'';$('f_dprice').value=(x.daiso&&x.daiso.price)||'';
+ $('f_name').value=x.name||'';$('f_cat').value=x.category||'';$('f_cp').value=x.coupang||'';$('f_nv').value=x.naver||'';$('f_tf').value=x.toss||'';$('f_dcode').value=(x.daiso&&x.daiso.code)||'';$('f_dprice').value=(x.daiso&&x.daiso.price)||'';
  $('f_vid').value=((x._m&&x._m.videos)||x.videos||[]).join(', ');$('f_hidden').checked=!!x.hidden;$('hidrow').hidden=false;$('del').hidden=x._src!=='manual';
  if(x.image){$('f_prev').src=x.image+'?t='+Date.now();$('f_prev').style.display='block'}}
 
@@ -159,12 +160,13 @@ $('f_img').onchange=e=>{const f=e.target.files[0];if(!f)return;const img=new Ima
   const url=c.toDataURL('image/jpeg',.86);imgData=url.split(',')[1];$('f_prev').src=url;$('f_prev').style.display='block';URL.revokeObjectURL(img.src)};img.src=URL.createObjectURL(f)};
 
 $('save').onclick=async()=>{
- const name=$('f_name').value.trim(),cp=$('f_cp').value.trim(),nv=$('f_nv').value.trim(),dcode=$('f_dcode').value.trim(),dprice=$('f_dprice').value.trim();
+ const name=$('f_name').value.trim(),cp=$('f_cp').value.trim(),nv=$('f_nv').value.trim(),tf=$('f_tf').value.trim(),dcode=$('f_dcode').value.trim(),dprice=$('f_dprice').value.trim();
  const E=m=>{$('ferr').textContent=m;return false};$('ferr').textContent='';
  if(!name)return E('상품 이름을 적어 주세요');
  if(cp&&!/coupang\.com/.test(cp))return E('쿠팡 링크는 link.coupang.com 주소여야 해요');
  if(nv&&!/naver\.(me|com)/.test(nv))return E('네이버 링크는 naver.me 주소여야 해요');
- if(!editing&&!cp&&!nv&&!dcode)return E('쿠팡·네이버 링크나 다이소 품번 중 하나는 있어야 허브에 보여요');
+ if(tf&&!/toss/.test(tf))return E('토스 링크는 쉐어링크에서 발급한 toss 주소여야 해요');
+ if(!editing&&!cp&&!nv&&!tf&&!dcode)return E('쿠팡·네이버·토스 링크나 다이소 품번 중 하나는 있어야 허브에 보여요');
  const vids=$('f_vid').value.split(/[,\s]+/).filter(Boolean).map(v=>v.replace(/\D/g,'').padStart(2,'0')).filter(Boolean);
  $('save').disabled=true;$('save').textContent='저장 중…';
  try{
@@ -174,7 +176,7 @@ $('save').onclick=async()=>{
   let item=manual.items.find(x=>+x.no===no);const isNew=!editing;
   if(!item){item={no,new:isNew||false};manual.items.push(item)}
   if(imgData){const path=`img/m${no}_${Date.now().toString(36)}.jpg`;await ghPut(path,imgData,null,`사진 ${no}`);item.image=path}
-  Object.assign(item,{name,category:$('f_cat').value.trim(),coupang:cp,naver:nv,videos:vids,hidden:$('f_hidden').checked,edited});
+  Object.assign(item,{name,category:$('f_cat').value.trim(),coupang:cp,naver:nv,toss:tf,videos:vids,hidden:$('f_hidden').checked,edited});
   if(dcode)item.daiso={code:dcode,price:dprice};else delete item.daiso;
   manual.items.sort((a,b)=>a.no-b.no);
   await ghPut('manual.json',b64enc(JSON.stringify(manual,null,1)),manualSha,`${isNew?'새 상품':'고침'} ${no} ${name}`);
