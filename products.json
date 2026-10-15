@@ -5,6 +5,7 @@
 "no": 127,
 "name": "다이소 공간 활용 욕실 수납 선반",
 "category": "욕실",
+"image": "img/127.jpg",
 "daiso": {
 "code": "1051646",
 "price": "5,000원"
@@ -44,6 +45,7 @@
 "no": 124,
 "name": "다이소 스테인리스 304 타공채반 22cm",
 "category": "주방",
+"image": "img/124.jpg",
 "daiso": {
 "code": "1079281",
 "price": "3,000원"
@@ -57,6 +59,7 @@
 "no": 123,
 "name": "다이소 채반 저장용기 2.2L",
 "category": "주방",
+"image": "img/123.jpg",
 "daiso": {
 "code": "1062958",
 "price": "2,000원"
@@ -70,6 +73,7 @@
 "no": 122,
 "name": "다이소 오픈캡 보관용기 1.4L",
 "category": "주방",
+"image": "img/122.jpg",
 "daiso": {
 "code": "1051141",
 "price": "2,000원"
@@ -83,6 +87,7 @@
 "no": 121,
 "name": "다이소 스텐바트 보관용기 2L",
 "category": "주방",
+"image": "img/121.jpg",
 "daiso": {
 "code": "1046177",
 "price": "5,000원"
