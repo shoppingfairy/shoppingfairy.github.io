@@ -1,5 +1,5 @@
 {
-"updated": "2026-10-16 10:51",
+"updated": "2026-10-16 11:01",
 "items": [
 {
 "no": 137,
@@ -10,6 +10,7 @@
 "coupang",
 "naver"
 ],
+"image": "img/137.jpg",
 "videos": [
 "64"
 ]
@@ -24,6 +25,7 @@
 "coupang",
 "naver"
 ],
+"image": "img/136.jpg",
 "videos": [
 "63"
 ]
@@ -37,6 +39,7 @@
 "coupang",
 "naver"
 ],
+"image": "img/135.jpg",
 "videos": [
 "62"
 ]
@@ -51,6 +54,7 @@
 "coupang",
 "naver"
 ],
+"image": "img/134.jpg",
 "videos": [
 "61"
 ]
@@ -65,6 +69,7 @@
 "coupang",
 "naver"
 ],
+"image": "img/133.jpg",
 "videos": [
 "60"
 ]
@@ -79,6 +84,7 @@
 "coupang",
 "naver"
 ],
+"image": "img/132.jpg",
 "videos": [
 "59"
 ]
@@ -93,6 +99,7 @@
 "coupang",
 "naver"
 ],
+"image": "img/131.jpg",
 "videos": [
 "58"
 ]
@@ -107,6 +114,7 @@
 "coupang",
 "naver"
 ],
+"image": "img/130.jpg",
 "videos": [
 "57"
 ]
@@ -589,8 +597,10 @@
 "name": "다이소 요석 석회 강력 제거제 500ml",
 "category": "욕실",
 "coupang": "https://link.coupang.com/a/hSOVrnhzoa",
+"naver": "https://naver.me/GdTchvE7",
 "similar": [
-"coupang"
+"coupang",
+"naver"
 ],
 "image": "img/74.jpg",
 "daiso": {
@@ -606,8 +616,10 @@
 "name": "오렌지 다용도 세정제 600ml",
 "category": "욕실",
 "coupang": "https://link.coupang.com/a/hSOUM2hBN6",
+"naver": "https://naver.me/GahkaPdu",
 "similar": [
-"coupang"
+"coupang",
+"naver"
 ],
 "image": "img/73.jpg",
 "daiso": {
@@ -664,6 +676,23 @@
 },
 "videos": [
 "16"
+]
+},
+{
+"no": 69,
+"name": "다이소 고급 접이식 선반 대형",
+"category": "주방",
+"coupang": "https://link.coupang.com/a/hSVKqjtXhs",
+"similar": [
+"coupang"
+],
+"image": "img/69.jpg",
+"daiso": {
+"code": "73714",
+"price": "5,000원"
+},
+"videos": [
+"15"
 ]
 },
 {
