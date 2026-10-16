@@ -1,5 +1,5 @@
 {
-"updated": "2026-10-16 09:07",
+"updated": "2026-10-16 09:40",
 "items": [
 {
 "no": 128,
@@ -44,8 +44,10 @@
 "name": "다이소 싱크대 필터헤드",
 "category": "주방",
 "coupang": "https://link.coupang.com/a/hSNiKcSniC",
+"naver": "https://naver.me/FyAB3Oxp",
 "similar": [
-"coupang"
+"coupang",
+"naver"
 ],
 "image": "img/126.jpg",
 "daiso": {
@@ -61,8 +63,10 @@
 "name": "다이소 펜트리 수납함 (바퀴형)",
 "category": "정리",
 "coupang": "https://link.coupang.com/a/hSNcO3TIRg",
+"naver": "https://naver.me/GprAmOZG",
 "similar": [
-"coupang"
+"coupang",
+"naver"
 ],
 "image": "img/125.jpg",
 "daiso": {
@@ -315,8 +319,10 @@
 "name": "다이소 이동식 2단 선반",
 "category": "정리",
 "coupang": "https://link.coupang.com/a/hSNbnGuP5o",
+"naver": "https://naver.me/xbKUYZgT",
 "similar": [
-"coupang"
+"coupang",
+"naver"
 ],
 "image": "img/94.jpg",
 "daiso": {
@@ -352,8 +358,10 @@
 "name": "다이소 7칸 수납박스",
 "category": "정리",
 "coupang": "https://link.coupang.com/a/hSNb3B2LRI",
+"naver": "https://naver.me/IDkfmp9V",
 "similar": [
-"coupang"
+"coupang",
+"naver"
 ],
 "image": "img/92.jpg",
 "daiso": {
@@ -467,17 +475,157 @@
 ]
 },
 {
+"no": 74,
+"name": "다이소 요석 석회 강력 제거제 500ml",
+"category": "욕실",
+"coupang": "https://link.coupang.com/a/hSOVrnhzoa",
+"similar": [
+"coupang"
+],
+"image": "img/74.jpg",
+"daiso": {
+"code": "1045002",
+"price": "3,000원"
+},
+"videos": [
+"16"
+]
+},
+{
+"no": 73,
+"name": "오렌지 다용도 세정제 600ml",
+"category": "욕실",
+"coupang": "https://link.coupang.com/a/hSOUM2hBN6",
+"similar": [
+"coupang"
+],
+"image": "img/73.jpg",
+"daiso": {
+"code": "23972",
+"price": "2,000원"
+},
+"videos": [
+"16"
+]
+},
+{
+"no": 72,
+"name": "홈스타 바르는 곰팡이 싹 120ml",
+"category": "욕실",
+"coupang": "https://link.coupang.com/a/hSOT8STu4i",
+"naver": "https://naver.me/FFq63gqg",
+"image": "img/72.jpg",
+"daiso": {
+"code": "1000833",
+"price": "3,000원"
+},
+"videos": [
+"16"
+]
+},
+{
+"no": 71,
+"name": "홈스타 3X 폼타입 락스와세제",
+"category": "욕실",
+"coupang": "https://link.coupang.com/a/hSOVrnhzoa",
+"image": "img/71.jpg",
+"daiso": {
+"code": "1043315",
+"price": "3,000원"
+},
+"videos": [
+"16"
+]
+},
+{
+"no": 70,
+"name": "다이소 세워두는 욕실 바닥 와이드 청소솔",
+"category": "욕실",
+"coupang": "https://link.coupang.com/a/hSOspCcCUC",
+"similar": [
+"coupang",
+"naver"
+],
+"image": "img/70.jpg",
+"daiso": {
+"code": "048053177",
+"price": "2,000원"
+},
+"videos": [
+"16"
+]
+},
+{
+"no": 68,
+"name": "다이소 실리콘 용기 500ml",
+"category": "주방",
+"coupang": "https://link.coupang.com/a/hSOmZ4Wgft",
+"naver": "https://naver.me/Gxregap2",
+"similar": [
+"coupang",
+"naver"
+],
+"image": "img/68.jpg",
+"daiso": {
+"code": "1045443",
+"price": "3,000원"
+},
+"videos": [
+"15"
+]
+},
+{
+"no": 67,
+"name": "다이소 일본제 전자레인지 1인분 냄비",
+"category": "주방",
+"coupang": "https://link.coupang.com/a/hSOmmt9KN2",
+"naver": "https://naver.me/FVFV5p1t",
+"similar": [
+"coupang",
+"naver"
+],
+"image": "img/67.jpg",
+"daiso": {
+"code": "048041639",
+"price": "3,000원"
+},
+"videos": [
+"15"
+]
+},
+{
 "no": 66,
 "name": "다이소 압연 스타일 접시 스탠드 6칸",
 "category": "주방",
 "coupang": "https://link.coupang.com/a/hSNm88dDO0",
+"naver": "https://naver.me/xgX2ipM6",
 "similar": [
-"coupang"
+"coupang",
+"naver"
 ],
 "image": "img/66.jpg",
 "daiso": {
 "code": "1063969",
 "price": "3,000원"
+},
+"videos": [
+"15"
+]
+},
+{
+"no": 65,
+"name": "다이소 전동 거품기",
+"category": "주방",
+"coupang": "https://link.coupang.com/a/hSOlHNirh6",
+"naver": "https://naver.me/IIDKJ8RO",
+"similar": [
+"coupang",
+"naver"
+],
+"image": "img/65.jpg",
+"daiso": {
+"code": "66380",
+"price": "2,000원"
 },
 "videos": [
 "15"
