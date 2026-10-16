@@ -1,10 +1,15 @@
 {
-"updated": "2026-10-16 08:44",
+"updated": "2026-10-16 09:07",
 "items": [
 {
 "no": 128,
 "name": "다이소 부직포 창틀 청소대",
 "category": "청소",
+"coupang": "https://link.coupang.com/a/hSNveAApc4",
+"naver": "https://naver.me/Fc6fGSTG",
+"similar": [
+"naver"
+],
 "image": "img/128.jpg",
 "daiso": {
 "code": "1035163",
@@ -18,6 +23,12 @@
 "no": 127,
 "name": "다이소 공간 활용 욕실 수납 선반",
 "category": "욕실",
+"coupang": "https://link.coupang.com/a/hSNzIsKra8",
+"naver": "https://naver.me/G9Uoa0ux",
+"similar": [
+"coupang",
+"naver"
+],
 "image": "img/127.jpg",
 "daiso": {
 "code": "1051646",
@@ -32,6 +43,10 @@
 "no": 126,
 "name": "다이소 싱크대 필터헤드",
 "category": "주방",
+"coupang": "https://link.coupang.com/a/hSNiKcSniC",
+"similar": [
+"coupang"
+],
 "image": "img/126.jpg",
 "daiso": {
 "code": "1029132",
@@ -45,6 +60,10 @@
 "no": 125,
 "name": "다이소 펜트리 수납함 (바퀴형)",
 "category": "정리",
+"coupang": "https://link.coupang.com/a/hSNcO3TIRg",
+"similar": [
+"coupang"
+],
 "image": "img/125.jpg",
 "daiso": {
 "code": "1057266",
@@ -58,6 +77,12 @@
 "no": 124,
 "name": "다이소 스테인리스 304 타공채반 22cm",
 "category": "주방",
+"coupang": "https://link.coupang.com/a/hSNbHtkCPI",
+"naver": "https://naver.me/xfb09z7r",
+"similar": [
+"coupang",
+"naver"
+],
 "image": "img/124.jpg",
 "daiso": {
 "code": "1079281",
@@ -72,6 +97,12 @@
 "no": 123,
 "name": "다이소 채반 저장용기 2.2L",
 "category": "주방",
+"coupang": "https://link.coupang.com/a/hSNcqCFkmO",
+"naver": "https://naver.me/FZoxiXbf",
+"similar": [
+"coupang",
+"naver"
+],
 "image": "img/123.jpg",
 "daiso": {
 "code": "1062958",
@@ -86,6 +117,11 @@
 "no": 122,
 "name": "다이소 오픈캡 보관용기 1.4L",
 "category": "주방",
+"coupang": "https://link.coupang.com/a/hSNm88dDO0",
+"similar": [
+"coupang",
+"naver"
+],
 "image": "img/122.jpg",
 "daiso": {
 "code": "1051141",
@@ -100,6 +136,12 @@
 "no": 121,
 "name": "다이소 스텐바트 보관용기 2L",
 "category": "주방",
+"coupang": "https://link.coupang.com/a/hSNlWjKLOm",
+"naver": "https://naver.me/FM9MvHca",
+"similar": [
+"coupang",
+"naver"
+],
 "image": "img/121.jpg",
 "daiso": {
 "code": "1046177",
@@ -272,6 +314,10 @@
 "no": 94,
 "name": "다이소 이동식 2단 선반",
 "category": "정리",
+"coupang": "https://link.coupang.com/a/hSNbnGuP5o",
+"similar": [
+"coupang"
+],
 "image": "img/94.jpg",
 "daiso": {
 "code": "1048081",
@@ -305,6 +351,10 @@
 "no": 92,
 "name": "다이소 7칸 수납박스",
 "category": "정리",
+"coupang": "https://link.coupang.com/a/hSNb3B2LRI",
+"similar": [
+"coupang"
+],
 "image": "img/92.jpg",
 "daiso": {
 "code": "1040700",
@@ -313,32 +363,6 @@
 "videos": [
 "20",
 "51"
-]
-},
-{
-"no": 91,
-"name": "다이소 물빠짐 트레이",
-"category": "정리",
-"image": "img/91.jpg",
-"daiso": {
-"code": "1071341",
-"price": "2,000원"
-},
-"videos": [
-"20"
-]
-},
-{
-"no": 90,
-"name": "다이소 회전 트레이",
-"category": "정리",
-"image": "img/90.jpg",
-"daiso": {
-"code": "1063378",
-"price": "2,000원"
-},
-"videos": [
-"20"
 ]
 },
 {
@@ -443,130 +467,17 @@
 ]
 },
 {
-"no": 74,
-"name": "다이소 요석 석회 강력 제거제 500ml",
-"category": "욕실",
-"image": "img/74.jpg",
-"daiso": {
-"code": "1045002",
-"price": "3,000원"
-},
-"videos": [
-"16"
-]
-},
-{
-"no": 73,
-"name": "오렌지 다용도 세정제 600ml",
-"category": "욕실",
-"image": "img/73.jpg",
-"daiso": {
-"code": "23972",
-"price": "2,000원"
-},
-"videos": [
-"16"
-]
-},
-{
-"no": 72,
-"name": "홈스타 바르는 곰팡이 싹 120ml",
-"category": "욕실",
-"image": "img/72.jpg",
-"daiso": {
-"code": "1000833",
-"price": "3,000원"
-},
-"videos": [
-"16"
-]
-},
-{
-"no": 71,
-"name": "홈스타 3X 폼타입 락스와세제",
-"category": "욕실",
-"image": "img/71.jpg",
-"daiso": {
-"code": "1043315",
-"price": "3,000원"
-},
-"videos": [
-"16"
-]
-},
-{
-"no": 70,
-"name": "다이소 세워두는 욕실 바닥 와이드 청소솔",
-"category": "욕실",
-"image": "img/70.jpg",
-"daiso": {
-"code": "048053177",
-"price": "2,000원"
-},
-"videos": [
-"16"
-]
-},
-{
-"no": 69,
-"name": "다이소 고급 접이식 선반 대형",
-"category": "주방",
-"image": "img/69.jpg",
-"daiso": {
-"code": "73714",
-"price": "5,000원"
-},
-"videos": [
-"15"
-]
-},
-{
-"no": 68,
-"name": "다이소 실리콘 용기 500ml",
-"category": "주방",
-"image": "img/68.jpg",
-"daiso": {
-"code": "1045443",
-"price": "3,000원"
-},
-"videos": [
-"15"
-]
-},
-{
-"no": 67,
-"name": "다이소 일본제 전자레인지 1인분 냄비",
-"category": "주방",
-"image": "img/67.jpg",
-"daiso": {
-"code": "048041639",
-"price": "3,000원"
-},
-"videos": [
-"15"
-]
-},
-{
 "no": 66,
 "name": "다이소 압연 스타일 접시 스탠드 6칸",
 "category": "주방",
+"coupang": "https://link.coupang.com/a/hSNm88dDO0",
+"similar": [
+"coupang"
+],
 "image": "img/66.jpg",
 "daiso": {
 "code": "1063969",
 "price": "3,000원"
-},
-"videos": [
-"15"
-]
-},
-{
-"no": 65,
-"name": "다이소 전동 거품기",
-"category": "주방",
-"image": "img/65.jpg",
-"daiso": {
-"code": "66380",
-"price": "2,000원"
 },
 "videos": [
 "15"
