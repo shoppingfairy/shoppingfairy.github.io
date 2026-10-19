@@ -1,5 +1,5 @@
 {
-"updated": "2026-10-20 05:37",
+"updated": "2026-10-20 05:52",
 "items": [
 {
 "no": 156,
@@ -72,7 +72,10 @@
 "similar": [
 "coupang"
 ],
-"image": "img/148.jpg"
+"image": "img/148.jpg",
+"videos": [
+"86"
+]
 },
 {
 "no": 147,
@@ -512,7 +515,10 @@
 "similar": [
 "coupang"
 ],
-"image": "img/117.jpg"
+"image": "img/117.jpg",
+"videos": [
+"85"
+]
 },
 {
 "no": 116,
